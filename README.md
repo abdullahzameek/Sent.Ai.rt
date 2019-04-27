@@ -4,6 +4,7 @@ A real-time camera feed that detects human emotion and adapts the style of the f
 picture that is in a style representative of the person’s mood.
 
 Extra Fearture 1 : Play back music that relates to the emotion?
+
 Extra Feature 2 : Save and Tweet out the picture using a Twitter Bot.
 
 In technical lingo, it’s capturing real-time video to perform sentiment analysis followed by neural style transfer 

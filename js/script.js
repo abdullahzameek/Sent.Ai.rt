@@ -1,8 +1,13 @@
 let video;
 let poseNet; // This would be the machine learning model
 let poses;
-let emojis = [];
 let neutral;
+let transfer = false;
+
+let style_names = ['happy', 'sad', 'angry', 'surprise', 'disgust'];
+let style_key = 0;
+let styles = [];
+
 
 function setup() {
     createCanvas(640, 480);
@@ -13,6 +18,13 @@ function setup() {
     faceapi.load
     faceapi.loadSsdMobilenetv1Model('/models')
     faceapi.loadFaceExpressionModel('/models');
+
+    for(let i = 0; i < style_names.length; i++){
+        let model_path = "../sentiModels/" + style_names[i];
+        styles[i] = ml5.styleTransfer(model_path, video, function () {
+          console.log(style_names[i] + " is loaded...");
+        });  
+    }
 
 }
 
@@ -30,7 +42,7 @@ function draw() {
 
 
                 if (detectionsWithExpressions == undefined) {
-                    console.log("No face detected");
+                    //console.log("No face detected");
                 }
                 else {
                     let face = detectionsWithExpressions.detection;
@@ -39,7 +51,7 @@ function draw() {
                         if (exprs[i].probability > max) {
                             max = exprs[i].probability;
                             bestExpr = exprs[i].expression;
-                            console.log(bestExpr);
+                            //console.log(bestExpr);
                         }
                     }
                 }

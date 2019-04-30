@@ -76,6 +76,7 @@ function draw() {
     
 function getStyleTransfer(expression){
     if(style_names.includes(expression)){
+        console.log(expression)
         return (style_names.indexOf(expression))
     } 
 }

@@ -15,8 +15,9 @@ function setup() {
     video = createCapture(VIDEO);
     video.hide() // hides the html element
 
+    //load the face API models here for sentiment analysis 
     faceapi.load
-    faceapi.loadSsdMobilenetv1Model('/models')
+    faceapi.loadSsdMobilenetv1Model('/models')                                                                                  
     faceapi.loadFaceExpressionModel('/models');
 
     for(let i = 0; i < style_names.length; i++){
@@ -26,20 +27,20 @@ function setup() {
         });  
     }
 
+    output = createImg('');
+    output.hide();
+
 }
 
 function draw() {
     faceapi.detectAllFaces(video.elt).withFaceExpressions()
         .then((allFaces) => {
-
             background(255);
             image(video, 640, 0, -640, 480)
             for (var detectionsWithExpressions of allFaces) {
                 console.log(allFaces);
-
                 let bestExpr = "";
                 let max = 0;
-
 
                 if (detectionsWithExpressions == undefined) {
                     //console.log("No face detected");

@@ -4,7 +4,7 @@ let poses;
 let neutral;
 let transfer = false;
 
-let style_names = ['happy', 'sad', 'angry', 'surprise', 'disgust'];
+let style_names = ['happy', 'sad', 'angry', 'surprised', 'disgusted'];
 let style_key = 0;
 let styles = [];
 
@@ -30,6 +30,8 @@ function setup() {
     output = createImg('');
     output.hide();
 
+    style_names.push("neutral");
+    console.log(style_names);
 }
 
 function draw() {
@@ -38,7 +40,6 @@ function draw() {
             background(255);
             image(video, 640, 0, -640, 480)
             for (var detectionsWithExpressions of allFaces) {
-                console.log(allFaces);
                 let bestExpr = "";
                 let max = 0;
 
@@ -52,10 +53,30 @@ function draw() {
                         if (exprs[i].probability > max) {
                             max = exprs[i].probability;
                             bestExpr = exprs[i].expression;
-                            //console.log(bestExpr);
                         }
                     }
+                    //we'll have to do style transfer over here
+                    var styleIndex = getStyleTransfer(bestExpr);
+                    if (style_names[styleIndex] === "neutral"){
+                        image(video, 640, 0, -640, 480);
+                    }
+                    else{
+                    if(styles[styleIndex].ready){
+                        styles[styleIndex].transfer(function (err, result) {
+                          output.attribute('src',result.src);
+                        });
+                    }
+                    image(output, 640, 0, -640, 480);
+                    console.log(output.width + ":" + output.height);
+                }
                 }
             }
         });
     }
+
+    
+function getStyleTransfer(expression){
+    if(style_names.includes(expression)){
+        return (style_names.indexOf(expression))
+    } 
+}

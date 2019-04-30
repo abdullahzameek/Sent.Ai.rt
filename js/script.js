@@ -67,7 +67,6 @@ function draw() {
                         });
                     }
                     image(output, 640, 0, -640, 480);
-                    console.log(output.width + ":" + output.height);
                 }
                 }
             }

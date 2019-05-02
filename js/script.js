@@ -10,8 +10,8 @@ let styles = [];
 
 
 function setup() {
-    createCanvas(640, 480);
-    background(255);
+    createCanvas(windowWidth, windowHeight);
+    background(0);
     video = createCapture(VIDEO);
     video.hide() // hides the html element
 
@@ -35,9 +35,10 @@ function setup() {
 }
 
 function draw() {
+    
     faceapi.detectAllFaces(video.elt).withFaceExpressions()
         .then((allFaces) => {
-            background(255);
+            background(0);
             image(video, 640, 0, -640, 480)
             for (var detectionsWithExpressions of allFaces) {
                 let bestExpr = "";
@@ -71,7 +72,7 @@ function draw() {
                 }
             }
         });
-    }
+}
 
     
 function getStyleTransfer(expression){

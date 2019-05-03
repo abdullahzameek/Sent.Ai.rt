@@ -175,3 +175,13 @@ function windowResized()
     resizeCanvas(windowWidth, windowHeight);
 }
 
+function playSong(expression)
+{
+    /**
+     * Okay, this one is a bit annoying. First, we'll pick a random song depending on the mood and save it to a variable. Once 
+     * that's done, we'll need to pick a random start time cuz no one wants to hear the beginning. Maybe some 
+     * random point between 30-75 seconds idk? 
+     * Then, once thats done, we playback? Sounds easy for now woop
+     * */
+}
+

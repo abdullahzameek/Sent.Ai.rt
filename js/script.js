@@ -14,7 +14,7 @@ let happySongs = [];
 let sadSongs = [];
 let angrySongs = [];
 let surprisedSongs = [];
-
+var currentSong;
 var song;
 
 let happyTitles = [
@@ -146,9 +146,16 @@ function draw()
                     if (style_names[styleIndex] === "neutral")
                     {
                         image(video, windowWidth/3, windowHeight/12, windowWidth/3, windowHeight/1.5);
+                        if(currentSong.isPlaying()){
+                            currentSong.stop();
+                        }
                     }
                     else{
                     if(styles[styleIndex].ready){
+                        if(currentSong.isPlaying()){
+                            currentSong.stop();
+                        }
+                        playSong(style_names[styleIndex])
                         styles[styleIndex].transfer(function (err, result) {
                           output.attribute('src',result.src);
                         });
@@ -183,5 +190,30 @@ function playSong(expression)
      * random point between 30-75 seconds idk? 
      * Then, once thats done, we playback? Sounds easy for now woop
      * */
+    var randSongIndex = Math.floor(Math.random() * 5) +1;
+    
+    //get the song
+    if(expression === "happy")
+    {
+        currentSong = happySongs[randSongIndex];
+    }
+    else if(expression === "sad")
+    {
+        currentSong = sadSongs[randSongIndex];
+    }
+    else if(expression === "angry")
+    {
+        currentSong = angrySongs[randSongIndex];
+    }
+    else if(expression === "surprised")
+    {
+        currentSong = surprisedSongs[randSongIndex];
+    }
+
+    var randTime = Math.floor(Math.random() * 46) +30;
+
+    currentSong.cueStart = randTime;
+
+    currentSong.play();
 }
 

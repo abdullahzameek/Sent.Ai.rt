@@ -3,7 +3,7 @@
 A real-time camera feed that detects human emotion and adapts the style of the feed in relation to the emotion to create a 
 picture that is in a style representative of the person’s mood.
 
-Extra Feature 1 : Play back music that relates to the emotion?
+Extra Feature 1 : Play back music that relates to the emotion? (This is almost done woot)
 
 Extra Feature 2 : Save and Tweet out the picture using a Twitter Bot.
 

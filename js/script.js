@@ -16,6 +16,8 @@ let angrySongs = [];
 let surprisedSongs = [];
 var currentSong;
 var song;
+var songIndex = 0;
+var prevStyle = "neutral";
 
 let happyTitles = [
     'Dont stop me now - Queen',
@@ -56,6 +58,7 @@ let surprisedTitles = [
 ]
 
 function preload(){
+    console.log("started loading music.....");
     for(let k =0; k < style_names.length;k++){
         var songFolder = "../assets/audio/" + style_names[k] + "/";
         for(let j=1; j <= numSongs; j++)
@@ -65,28 +68,25 @@ function preload(){
                 song = loadSound(songFolder + j.toString() +".mp3");
                 happySongs.push(song);
             }
-            console.log("happy songs loaded");
             if(style_names[k] === "sad")
             {
                 song = loadSound(songFolder + j.toString() +".mp3");
                 sadSongs.push(song);
             }
-            console.log("sad songs loaded");
             if(style_names[k] === "angry")
             {
                 song = loadSound(songFolder + j.toString() +".mp3");
                 angrySongs.push(song);
             }
-            console.log("angry songs loaded");
             if(style_names[k] === "surprised")
             {
                 song = loadSound(songFolder + j.toString() +".mp3");
                 surprisedSongs.push(song);
             }
-            console.log("surprised songs loaded");
         }
     }
     currentSong = happySongs[0];
+    console.log("done loading music.....");
 }
 
 
@@ -148,26 +148,28 @@ function draw()
                     }
                     //we'll have to do style transfer over here
                     var styleIndex = getStyleTransfer(bestExpr);
-                    var prevStyle = style_names[styleIndex];
+                    
                     if (style_names[styleIndex] === "neutral")
                     {
-                        if(currentSong.isPlaying()){
-                            currentSong.stop();
-                        }
+                        stopSong();
                         image(video, windowWidth/3, windowHeight/12, windowWidth/3, windowHeight/1.5);
+                        var prevStyle = style_names[styleIndex];
+
                     }
                     else{
                     if(styles[styleIndex].ready){
-                        if(currentSong.isPlaying()){
-                            currentSong.stop();
+                        if (!(prevStyle === style_names[styleIndex])){
+                            stopSong();
+                            var songIndex = playSong(style_names[styleIndex])
                         }
-                        playSong(style_names[styleIndex])
                         styles[styleIndex].transfer(function (err, result) {
                           output.attribute('src',result.src);
                         });
+                        var prevStyle = style_names[styleIndex];
                     }
                     image(output,windowWidth/3, windowHeight/12, windowWidth/3, windowHeight/1.5);
                 }
+
             }
         }
     });
@@ -196,7 +198,7 @@ function playSong(expression)
      * random point between 30-75 seconds idk? 
      * Then, once thats done, we playback? Sounds easy for now woop
      * */
-    var randSongIndex = Math.floor(Math.random() * 5) +1;
+    var randSongIndex = Math.floor(Math.random() * 4) +1;
     var randTime = Math.floor(Math.random() * 46) +30;
 
     //get the song
@@ -220,5 +222,25 @@ function playSong(expression)
         surprisedSongs[randSongIndex].cueStart = randTime;
         surprisedSongs[randSongIndex].play();
     }
+    return randSongIndex
 }
 
+function stopSong()
+{
+    for(var p=0; p < numSongs; p++)
+    {
+        if(happySongs[p].isPlaying()){
+            happySongs[p].stop()
+        }
+        if(sadSongs[p].isPlaying()){
+            sadSongs[p].stop()
+        }
+        if(angrySongs[p].isPlaying()){
+            angrySongs[p].stop()
+        }
+        if(surprisedSongs[p].isPlaying()){
+            surprisedSongs[p].stop()
+        }
+
+    }
+}

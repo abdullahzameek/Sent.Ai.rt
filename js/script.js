@@ -65,23 +65,28 @@ function preload(){
                 song = loadSound(songFolder + j.toString() +".mp3");
                 happySongs.push(song);
             }
+            console.log("happy songs loaded");
             if(style_names[k] === "sad")
             {
                 song = loadSound(songFolder + j.toString() +".mp3");
                 sadSongs.push(song);
             }
+            console.log("sad songs loaded");
             if(style_names[k] === "angry")
             {
                 song = loadSound(songFolder + j.toString() +".mp3");
                 angrySongs.push(song);
             }
+            console.log("angry songs loaded");
             if(style_names[k] === "surprised")
             {
                 song = loadSound(songFolder + j.toString() +".mp3");
                 surprisedSongs.push(song);
             }
+            console.log("surprised songs loaded");
         }
     }
+    currentSong = happySongs[0];
 }
 
 
@@ -143,12 +148,13 @@ function draw()
                     }
                     //we'll have to do style transfer over here
                     var styleIndex = getStyleTransfer(bestExpr);
+                    var prevStyle = style_names[styleIndex];
                     if (style_names[styleIndex] === "neutral")
                     {
-                        image(video, windowWidth/3, windowHeight/12, windowWidth/3, windowHeight/1.5);
                         if(currentSong.isPlaying()){
                             currentSong.stop();
                         }
+                        image(video, windowWidth/3, windowHeight/12, windowWidth/3, windowHeight/1.5);
                     }
                     else{
                     if(styles[styleIndex].ready){
@@ -191,29 +197,28 @@ function playSong(expression)
      * Then, once thats done, we playback? Sounds easy for now woop
      * */
     var randSongIndex = Math.floor(Math.random() * 5) +1;
-    
+    var randTime = Math.floor(Math.random() * 46) +30;
+
     //get the song
     if(expression === "happy")
     {
-        currentSong = happySongs[randSongIndex];
+        happySongs[randSongIndex].cueStart = randTime;
+        happySongs[randSongIndex].play();
     }
     else if(expression === "sad")
     {
-        currentSong = sadSongs[randSongIndex];
+        sadSongs[randSongIndex].cueStart = randTime;
+        sadSongs[randSongIndex].play();
     }
     else if(expression === "angry")
     {
-        currentSong = angrySongs[randSongIndex];
+        angrySongs[randSongIndex].cueStart = randTime;
+        angrySongs[randSongIndex].play();
     }
     else if(expression === "surprised")
     {
-        currentSong = surprisedSongs[randSongIndex];
+        surprisedSongs[randSongIndex].cueStart = randTime;
+        surprisedSongs[randSongIndex].play();
     }
-
-    var randTime = Math.floor(Math.random() * 46) +30;
-
-    currentSong.cueStart = randTime;
-
-    currentSong.play();
 }
 

@@ -17,7 +17,7 @@ let surprisedSongs = [];
 var currentSong;
 var song;
 var songIndex = 0;
-var prevStyle = "neutral";
+var prevStyle = "";
 
 let happyTitles = [
     'Dont stop me now - Queen',
@@ -136,8 +136,10 @@ function draw()
                 }
                 else 
                 {
+                
                     let face = detectionsWithExpressions.detection;
                     let exprs = detectionsWithExpressions.expressions;
+
                     for (let i = 0; i < exprs.length; i++) 
                     {
                         if (exprs[i].probability > max) 
@@ -146,31 +148,43 @@ function draw()
                             bestExpr = exprs[i].expression;
                         }
                     }
+
                     //we'll have to do style transfer over here
                     var styleIndex = getStyleTransfer(bestExpr);
-                    
+               
                     if (style_names[styleIndex] === "neutral")
                     {
                         stopSong();
                         image(video, windowWidth/3, windowHeight/12, windowWidth/3, windowHeight/1.5);
-                        var prevStyle = style_names[styleIndex];
-
                     }
                     else{
                     if(styles[styleIndex].ready){
-                        if (!(prevStyle === style_names[styleIndex])){
+                        if(style_names[styleIndex] != prevStyle)
+                        {
                             stopSong();
                             var songIndex = playSong(style_names[styleIndex])
+                            print(getTitle(style_names[styleIndex], songIndex))
+                            styles[styleIndex].transfer(function (err, result) {
+                            output.attribute('src',result.src);
+                            });
                         }
-                        styles[styleIndex].transfer(function (err, result) {
-                          output.attribute('src',result.src);
-                        });
-                        var prevStyle = style_names[styleIndex];
+                        else
+                        {
+                            print(getTitle(style_names[styleIndex], songIndex))
+                            styles[styleIndex].transfer(function (err, result) {
+                            output.attribute('src',result.src);
+                            });
+                        }
+
                     }
                     image(output,windowWidth/3, windowHeight/12, windowWidth/3, windowHeight/1.5);
-                }
 
+                }
+                
+                // console.log("Current style is ", style_names[styleIndex]);
+                // console.log("Previous style is ", prevStyle);
             }
+            prevStyle = style_names[styleIndex];
         }
     });
 }
@@ -204,23 +218,24 @@ function playSong(expression)
     //get the song
     if(expression === "happy")
     {
-        happySongs[randSongIndex].cueStart = randTime;
         happySongs[randSongIndex].play();
+        happySongs[randSongIndex].jump(randTime);
+        
     }
     else if(expression === "sad")
     {
-        sadSongs[randSongIndex].cueStart = randTime;
         sadSongs[randSongIndex].play();
+        sadSongs[randSongIndex].jump(randTime);
     }
     else if(expression === "angry")
     {
-        angrySongs[randSongIndex].cueStart = randTime;
         angrySongs[randSongIndex].play();
+        angrySongs[randSongIndex].jump(randTime);
     }
     else if(expression === "surprised")
     {
-        surprisedSongs[randSongIndex].cueStart = randTime;
         surprisedSongs[randSongIndex].play();
+        surprisedSongs[randSongIndex].jump(randTime);
     }
     return randSongIndex
 }
@@ -243,4 +258,29 @@ function stopSong()
         }
 
     }
+}
+
+function getTitle(expression, index)
+{
+    if(expression === "happy")
+    {
+        return happyTitles[index];
+    }
+    else if (expression === "sad")
+    {
+        return sadTitles[index];
+    }
+    else if(expression === "angry")
+    {
+        return angryTitles[index];
+    }
+    else if(expression === "surprised")
+    {
+        return surprisedTitles[index];
+    }
+}
+
+function marqueeThing()
+{
+    createP("Currently Playing: ");
 }

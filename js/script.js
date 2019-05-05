@@ -279,8 +279,3 @@ function getTitle(expression, index)
         return surprisedTitles[index];
     }
 }
-
-function marqueeThing()
-{
-    createP("Currently Playing: ");
-}

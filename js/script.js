@@ -3,7 +3,6 @@ let poseNet; // This would be the machine learning model
 let poses;
 let neutral;
 let transfer = false;
-
 let style_names = ['happy', 'sad', 'angry', 'surprised'];
 let style_key = 0;
 let styles = [];
@@ -92,6 +91,7 @@ function preload(){
 
 function setup() 
 {
+    saveThis = createGraphics(windowWidth/3, windowHeight/1.5);
     createCanvas(windowWidth, windowHeight);
     background(0);
     video = createCapture(VIDEO);
@@ -111,7 +111,7 @@ function setup()
         });  
     }
 
-    output = createImg('');
+    output = createImg(windowWidth/3, windowHeight/1.5);
     output.hide();
 
     style_names.push("neutral");
@@ -277,5 +277,15 @@ function getTitle(expression, index)
     else if(expression === "surprised")
     {
         return surprisedTitles[index];
+    }
+}
+
+function keyTyped(){
+    if (key === 's'){
+        console.log("tried to save image");
+        var c = get(windowWidth/3, windowHeight/12, windowWidth/3, windowHeight/1.5)
+        saveThis.image(c, 0, 0);
+        save(saveThis, "rand.png");
+        console.log("done");
     }
 }

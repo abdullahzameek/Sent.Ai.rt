@@ -124,7 +124,7 @@ function draw()
     faceapi.detectAllFaces(video.elt).withFaceExpressions()
         .then((allFaces) => {
             background(0);
-            //image(video, windowWidth/3, windowHeight/12, windowWidth/3, windowHeight/1.5)
+            image(video, windowWidth/3, windowHeight/12, windowWidth/3, windowHeight/1.5)
             for (var detectionsWithExpressions of allFaces)
             {
                 let bestExpr = "";

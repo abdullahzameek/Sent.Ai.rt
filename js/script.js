@@ -120,11 +120,11 @@ function setup()
 
 function draw() 
 {
-    
+    writeText();
     faceapi.detectAllFaces(video.elt).withFaceExpressions()
         .then((allFaces) => {
             background(0);
-            image(video, windowWidth/3, windowHeight/12, windowWidth/3, windowHeight/1.5)
+            image(video, windowWidth/3, windowHeight/12, windowWidth/3.5, windowHeight/1.5)
             for (var detectionsWithExpressions of allFaces)
             {
                 let bestExpr = "";
@@ -136,7 +136,7 @@ function draw()
                 }
                 else 
                 {
-                
+                    
                     let face = detectionsWithExpressions.detection;
                     let exprs = detectionsWithExpressions.expressions;
 
@@ -151,11 +151,11 @@ function draw()
 
                     //we'll have to do style transfer over here
                     var styleIndex = getStyleTransfer(bestExpr);
-               
+                    
                     if (style_names[styleIndex] === "neutral")
                     {
                         stopSong();
-                        image(video, windowWidth/3, windowHeight/12, windowWidth/3, windowHeight/1.5);
+                        image(video, windowWidth/3, windowHeight/12, windowWidth/3.5, windowHeight/1.5);
                     }
                     else{
                     if(styles[styleIndex].ready){
@@ -177,7 +177,7 @@ function draw()
                         }
 
                     }
-                    image(output,windowWidth/3, windowHeight/12, windowWidth/3, windowHeight/1.5);
+                    image(output,windowWidth/3, windowHeight/12, windowWidth/3.5, windowHeight/1.5);
 
                 }
                 
@@ -258,7 +258,7 @@ function stopSong()
         }
 
     }
-}
+}   
 
 function getTitle(expression, index)
 {
@@ -283,9 +283,22 @@ function getTitle(expression, index)
 function keyTyped(){
     if (key === 's'){
         console.log("tried to save image");
-        var c = get(windowWidth/3, windowHeight/12, windowWidth/3, windowHeight/1.5)
+        var c = get(windowWidth/3, windowHeight/12, windowWidth/3.5, windowHeight/1.5)
         saveThis.image(c, 0, 0);
-        save(saveThis, "rand.png");
+        save(saveThis, "Filtered.png");
         console.log("done");
     }
-}
+}   
+
+function writeText(){
+    textSize(16);
+    fill(255);
+    text("Currently Playing: ", windowWidth*0.05, windowHeight*0.9);
+ }
+
+ function toggleStyleTransfer()
+ {
+    if(transfer){
+        transfer = !transfer;
+    }
+ }

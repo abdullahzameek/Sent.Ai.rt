@@ -2,7 +2,7 @@ let video;
 let poseNet; // This would be the machine learning model
 let poses;
 let neutral;
-let transfer = false;
+let transfer = true;
 let style_names = ['happy', 'sad', 'angry', 'surprised'];
 let style_key = 0;
 let styles = [];
@@ -125,6 +125,7 @@ function draw()
         .then((allFaces) => {
             background(0);
             image(video, windowWidth/3, windowHeight/12, windowWidth/3.5, windowHeight/1.5)
+
             for (var detectionsWithExpressions of allFaces)
             {
                 let bestExpr = "";
@@ -136,8 +137,6 @@ function draw()
                 }
                 else 
                 {
-                    
-                    let face = detectionsWithExpressions.detection;
                     let exprs = detectionsWithExpressions.expressions;
 
                     for (let i = 0; i < exprs.length; i++) 
@@ -157,36 +156,26 @@ function draw()
                         stopSong();
                         image(video, windowWidth/3, windowHeight/12, windowWidth/3.5, windowHeight/1.5);
                     }
-                    else{
-                    if(styles[styleIndex].ready){
-                        if(style_names[styleIndex] != prevStyle)
+                    else
+                    {
+                    if(styles[styleIndex].ready)
+                    {
+                        if(transfer)
                         {
                             stopSong();
                             var songIndex = playSong(style_names[styleIndex]);
-                            print(getTitle(style_names[styleIndex], songIndex))
-                            styles[styleIndex].transfer(function (err, result) {
-                            output.attribute('src',result.src);
-                            });
-                        }
-                        else
-                        {
-                            
                             print(getTitle(style_names[styleIndex], songIndex));
-                            styles[styleIndex].transfer(function (err, result) {
+                            writeText(getTitle(style_names[styleIndex]));
+                            styles[styleIndex].transfer(function (err, result){
                             output.attribute('src',result.src);
                             });
                         }
-
                     }
                     image(output,windowWidth/3, windowHeight/12, windowWidth/3.5, windowHeight/1.5);
-
+                    }
                 }
-                
-                // console.log("Current style is ", style_names[styleIndex]);
-                // console.log("Previous style is ", prevStyle);
-            }
             prevStyle = style_names[styleIndex];
-        }
+            }
     });
 }
 
@@ -289,6 +278,10 @@ function keyTyped(){
         save(saveThis, "Filtered.png");
         console.log("done");
     }
+    if(transfer){
+        transfer = !transfer;
+        console.log("Stopped/started the transfer");
+    }
 }   
 
 function writeText(title){
@@ -300,7 +293,5 @@ function writeText(title){
 
  function toggleStyleTransfer()
  {
-    if(transfer){
-        transfer = !transfer;
-    }
+ 
  }

@@ -120,7 +120,7 @@ function setup()
 
 function draw() 
 {
-    writeText();
+    
     faceapi.detectAllFaces(video.elt).withFaceExpressions()
         .then((allFaces) => {
             background(0);
@@ -148,7 +148,7 @@ function draw()
                             bestExpr = exprs[i].expression;
                         }
                     }
-
+                    
                     //we'll have to do style transfer over here
                     var styleIndex = getStyleTransfer(bestExpr);
                     
@@ -162,7 +162,7 @@ function draw()
                         if(style_names[styleIndex] != prevStyle)
                         {
                             stopSong();
-                            var songIndex = playSong(style_names[styleIndex])
+                            var songIndex = playSong(style_names[styleIndex]);
                             print(getTitle(style_names[styleIndex], songIndex))
                             styles[styleIndex].transfer(function (err, result) {
                             output.attribute('src',result.src);
@@ -170,7 +170,8 @@ function draw()
                         }
                         else
                         {
-                            print(getTitle(style_names[styleIndex], songIndex))
+                            
+                            print(getTitle(style_names[styleIndex], songIndex));
                             styles[styleIndex].transfer(function (err, result) {
                             output.attribute('src',result.src);
                             });
@@ -290,10 +291,11 @@ function keyTyped(){
     }
 }   
 
-function writeText(){
+function writeText(title){
     textSize(16);
     fill(255);
-    text("Currently Playing: ", windowWidth*0.05, windowHeight*0.9);
+    text("Currently Playing: " +title, windowWidth*0.05, windowHeight*0.9);
+    
  }
 
  function toggleStyleTransfer()

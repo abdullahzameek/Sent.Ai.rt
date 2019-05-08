@@ -123,6 +123,7 @@ function setup()
 function draw() 
 {
     writeText();
+    printTitle('');
     faceapi.detectAllFaces(video.elt).withFaceExpressions()
         .then((allFaces) => {
             background(0);
@@ -302,6 +303,8 @@ function writeText(){
     textSize(27);
     fill(255);
     text("Hit the spacebar to take a picture!", windowWidth*0.33, windowHeight*0.82);
+    textSize(30);
+    text("sent.ai.rt", windowWidth*0.43, windowHeight*0.05);
  }
 
  function printTitle(title){
@@ -311,7 +314,7 @@ function writeText(){
     textFont(fontNew);
     textSize(20);
     fill(255);
-    text("Currently Playing: "+title, windowWidth/2, windowHeight*0.95);
+    text("Currently Playing: "+title, windowWidth/3, windowHeight*0.95);
  }
 
 

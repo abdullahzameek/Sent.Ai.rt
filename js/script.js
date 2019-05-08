@@ -6,9 +6,7 @@ let transfer = true;
 let style_names = ['happy', 'sad', 'angry', 'surprised'];
 let style_key = 0;
 let styles = [];
-
 let numSongs = 5;
-
 let happySongs = [];
 let sadSongs = [];
 let angrySongs = [];
@@ -46,7 +44,7 @@ let sadTitles = [
     'Behind Blue Eyes - Limp Bizkit',
     'Videotape - Radiohead',
     'Hurt - NIN'
-]
+];
 
 let surprisedTitles = [
     'Tiptoe Through The Tulips - Tiny Tim',
@@ -54,7 +52,7 @@ let surprisedTitles = [
     'Babooshka - Kate Bush',
     'Sleepwalker - Hey Ocean',
     'will he - joji'
-]
+];
 
 function preload(){
     console.log("started loading music.....");
@@ -120,7 +118,7 @@ function setup()
 
 function draw() 
 {
-    
+    writeText();
     faceapi.detectAllFaces(video.elt).withFaceExpressions()
         .then((allFaces) => {
             background(0);
@@ -163,14 +161,17 @@ function draw()
                         {
                             stopSong();
                             var songIndex = playSong(style_names[styleIndex])
-                            print(getTitle(style_names[styleIndex], songIndex))
+                            song = getTitle(style_names[styleIndex], songIndex) 
+                            print(song);
+                            printTitle(song);
                             styles[styleIndex].transfer(function (err, result) {
                             output.attribute('src',result.src);
                             });
                         }
                         else
                         {
-                            print(getTitle(style_names[styleIndex], songIndex))
+                            print(song);
+                            printTitle(song);
                             styles[styleIndex].transfer(function (err, result) {
                             output.attribute('src',result.src);
                             });
@@ -181,8 +182,8 @@ function draw()
 
                 }
                 
-                 console.log("Current style is ", style_names[styleIndex]);
-                 console.log("Previous style is ", prevStyle);
+                console.log("Current style is ", style_names[styleIndex]);
+                console.log("Previous style is ", prevStyle);
             }
             prevStyle = style_names[styleIndex];
         }
@@ -287,14 +288,19 @@ function keyTyped(){
         save(saveThis, "Filtered.png");
         console.log("done");
     }
-    if(transfer){
-        transfer = !transfer;
-        console.log("Stopped/started the transfer");
-    }
 }   
 
-function writeText(title){
+function writeText(){
+    textSize(24);
+    fill(255);
+    text("Hit the spacebar to save the picture!", windowWidth*0.37, windowHeight*0.9);
+ }
+
+ function printTitle(title){
+    if(title == undefined){
+        title = ' ';
+    }
     textSize(16);
     fill(255);
-    text("Hit the spacebar to save the picture!", windowWidth*0.05, windowHeight*0.9);
+    text("Currently Playing: "+title, windowWidth*0.1, windowHeight*0.9);
  }

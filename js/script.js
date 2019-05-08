@@ -54,7 +54,11 @@ let surprisedTitles = [
     'will he - joji'
 ];
 
+
+
+
 function preload(){
+    fontNew = loadFont('assets/cour.ttf');
     console.log("started loading music.....");
     for(let k =0; k < style_names.length;k++){
         var songFolder = "../assets/audio/" + style_names[k] + "/";
@@ -153,6 +157,7 @@ function draw()
                     if (style_names[styleIndex] === "neutral")
                     {
                         stopSong();
+                        displayWords(style_names[styleIndex]);
                         image(video, windowWidth/3, windowHeight/12, windowWidth/3.5, windowHeight/1.5);
                     }
                     else{
@@ -164,6 +169,7 @@ function draw()
                             song = getTitle(style_names[styleIndex], songIndex) 
                             print(song);
                             printTitle(song);
+                            displayWords(style_names[styleIndex]);
                             styles[styleIndex].transfer(function (err, result) {
                             output.attribute('src',result.src);
                             });
@@ -172,6 +178,7 @@ function draw()
                         {
                             print(song);
                             printTitle(song);
+                            displayWords(style_names[styleIndex]);
                             styles[styleIndex].transfer(function (err, result) {
                             output.attribute('src',result.src);
                             });
@@ -182,8 +189,8 @@ function draw()
 
                 }
                 
-                console.log("Current style is ", style_names[styleIndex]);
-                console.log("Previous style is ", prevStyle);
+                // console.log("Current style is ", style_names[styleIndex]);
+                // console.log("Previous style is ", prevStyle);
             }
             prevStyle = style_names[styleIndex];
         }
@@ -291,16 +298,159 @@ function keyTyped(){
 }   
 
 function writeText(){
-    textSize(24);
+    textFont(fontNew);
+    textSize(27);
     fill(255);
-    text("Hit the spacebar to save the picture!", windowWidth*0.37, windowHeight*0.9);
+    text("Hit the spacebar to take a picture!", windowWidth*0.33, windowHeight*0.82);
  }
 
  function printTitle(title){
     if(title == undefined){
         title = ' ';
     }
-    textSize(16);
+    textFont(fontNew);
+    textSize(20);
     fill(255);
-    text("Currently Playing: "+title, windowWidth*0.1, windowHeight*0.9);
+    text("Currently Playing: "+title, windowWidth/2, windowHeight*0.95);
  }
+
+
+ let words = [
+    'bliss', //0
+    'joy', //1 
+    'delight', //2
+    'happiness', //3
+
+    'sadness', //4
+    'agony', //5
+    'sorrow', //6
+    'desolation', //7
+
+    'anger',//8
+    'fury',//9
+    'wrath',//10
+    'rage',//11
+
+    'surprised',//12
+    'shocked',//13
+    'astonished',//14
+    'startled'//15
+];
+
+//windowWidth/3, windowHeight/12, windowWidth/3.5, windowHeight/1.5
+function displayWords(expression)
+{
+    console.log("the expression is "+expression);
+    if(expression === "neutral")
+    {
+        fill(0);
+        textSize(26);
+        text(words[0],windowWidth/6, windowHeight/2);
+        text(words[4],windowWidth/7, windowHeight/4);
+        text(words[8],windowWidth/5, windowHeight/3);
+        text(words[12],windowWidth/8.5, 3*windowHeight/4);
+        text(words[1],windowWidth/12, 7*windowHeight/12);
+        text(words[5],windowWidth/10, 5*windowHeight/6);
+        text(words[9],windowWidth/5, 2*windowHeight/5);
+        text(words[13],windowWidth/9, 8*windowHeight/12);
+        text(words[2],windowWidth/6+windowWidth/1.6, windowHeight/2);
+        text(words[6],windowWidth/7+windowWidth/1.6, windowHeight/4);
+        text(words[10],windowWidth/5+windowWidth/1.6, windowHeight/3);
+        text(words[14],windowWidth/8.5+windowWidth/1.6, 3*windowHeight/4);
+        text(words[3],windowWidth/12+windowWidth/1.6, 7*windowHeight/12);
+        text(words[7],windowWidth/10+windowWidth/1.6, 5*windowHeight/6);
+        text(words[11],windowWidth/5+windowWidth/1.6, 2*windowHeight/5);
+        text(words[15],windowWidth/9+windowWidth/1.6, 8*windowHeight/12);
+    }
+    if(expression === "happy")
+    {
+        fill(255,255,random(10,200));
+        textSize(26);
+        text(words[0],windowWidth/6, windowHeight/2);
+        text(words[1],windowWidth/12, 7*windowHeight/12);
+        text(words[2],windowWidth/6+windowWidth/1.6, windowHeight/2);
+        text(words[3],windowWidth/12+windowWidth/1.6, 7*windowHeight/12);
+        fill(0);
+        text(words[4],windowWidth/7, windowHeight/4);
+        text(words[8],windowWidth/5, windowHeight/3);
+        text(words[12],windowWidth/8.5, 3*windowHeight/4);
+        text(words[5],windowWidth/10, 5*windowHeight/6);
+        text(words[9],windowWidth/5, 2*windowHeight/5);
+        text(words[13],windowWidth/9, 8*windowHeight/12);
+        text(words[6],windowWidth/7+windowWidth/1.6, windowHeight/4);
+        text(words[10],windowWidth/5+windowWidth/1.6, windowHeight/3);
+        text(words[14],windowWidth/8.5+windowWidth/1.6, 3*windowHeight/4);
+        text(words[7],windowWidth/10+windowWidth/1.6, 5*windowHeight/6);
+        text(words[11],windowWidth/5+windowWidth/1.6, 2*windowHeight/5);
+        text(words[15],windowWidth/9+windowWidth/1.6, 8*windowHeight/12);
+    }
+    if(expression === "sad")
+    {
+        fill(random(0,40),random(0,40), random(200,255));
+        textSize(26);
+        text(words[4],windowWidth/7, windowHeight/4);
+        text(words[5],windowWidth/10, 5*windowHeight/6);
+        text(words[6],windowWidth/7+windowWidth/1.6, windowHeight/4);
+        text(words[7],windowWidth/10+windowWidth/1.6, 5*windowHeight/6);
+        fill(0);
+        text(words[8],windowWidth/5, windowHeight/3);
+        text(words[12],windowWidth/8.5, 3*windowHeight/4);
+        text(words[1],windowWidth/12, 7*windowHeight/12);
+        text(words[9],windowWidth/5, 2*windowHeight/5);
+        text(words[13],windowWidth/9, 8*windowHeight/12);
+        text(words[2],windowWidth/6+windowWidth/1.6, windowHeight/2);
+        text(words[10],windowWidth/5+windowWidth/1.6, windowHeight/3);
+        text(words[14],windowWidth/8.5+windowWidth/1.6, 3*windowHeight/4);
+        text(words[3],windowWidth/12+windowWidth/1.6, 7*windowHeight/12);
+        text(words[11],windowWidth/5+windowWidth/1.6, 2*windowHeight/5);
+        text(words[15],windowWidth/9+windowWidth/1.6, 8*windowHeight/12);
+        text(words[0],windowWidth/6, windowHeight/2);
+    }
+    if(expression === "angry")
+    {
+
+        fill(random(200,255), random(0,40),random(0,40));
+        textSize(26);
+        text(words[8],windowWidth/5, windowHeight/3);
+        text(words[9],windowWidth/5, 2*windowHeight/5);
+        text(words[10],windowWidth/5+windowWidth/1.6, windowHeight/3);
+        text(words[11],windowWidth/5+windowWidth/1.6, 2*windowHeight/5);
+        fill(0);
+        text(words[0],windowWidth/6, windowHeight/2);
+        text(words[4],windowWidth/7, windowHeight/4);
+        text(words[1],windowWidth/12, 7*windowHeight/12);
+        text(words[5],windowWidth/10, 5*windowHeight/6);
+        text(words[13],windowWidth/9, 8*windowHeight/12);
+        text(words[2],windowWidth/6+windowWidth/1.6, windowHeight/2);
+        text(words[6],windowWidth/7+windowWidth/1.6, windowHeight/4);
+        text(words[14],windowWidth/8.5+windowWidth/1.6, 3*windowHeight/4);
+        text(words[3],windowWidth/12+windowWidth/1.6, 7*windowHeight/12);
+        text(words[7],windowWidth/10+windowWidth/1.6, 5*windowHeight/6);
+        text(words[12],windowWidth/8.5, 3*windowHeight/4);
+        text(words[15],windowWidth/9+windowWidth/1.6, 8*windowHeight/12);
+    }
+
+    if(expression === "surprised")
+    {
+        fill(245,245,245);
+        textSize(26);
+        text(words[12],windowWidth/8.5, 3*windowHeight/4);
+        text(words[13],windowWidth/9, 8*windowHeight/12);
+        text(words[14],windowWidth/8.5+windowWidth/1.6, 3*windowHeight/4);
+        text(words[15],windowWidth/9+windowWidth/1.6, 8*windowHeight/12);
+        fill(0);
+        text(words[0],windowWidth/6, windowHeight/2);
+        text(words[4],windowWidth/7, windowHeight/4);
+        text(words[8],windowWidth/5, windowHeight/3);
+        text(words[1],windowWidth/12, 7*windowHeight/12);
+        text(words[5],windowWidth/10, 5*windowHeight/6);
+        text(words[9],windowWidth/5, 2*windowHeight/5);
+        text(words[2],windowWidth/6+windowWidth/1.6, windowHeight/2);
+        text(words[6],windowWidth/7+windowWidth/1.6, windowHeight/4);
+        text(words[10],windowWidth/5+windowWidth/1.6, windowHeight/3);
+        text(words[3],windowWidth/12+windowWidth/1.6, 7*windowHeight/12);
+        text(words[7],windowWidth/10+windowWidth/1.6, 5*windowHeight/6);
+        text(words[11],windowWidth/5+windowWidth/1.6, 2*windowHeight/5);
+        
+    }
+}

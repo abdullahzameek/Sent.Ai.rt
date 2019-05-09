@@ -4,7 +4,8 @@
   "description": "A real-time camera feed that detects human emotion and adapts the style of the feed in relation to the emotion to create a  picture that is in a style representative of the person’s mood.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node index.js"
   },
   "repository": {
     "type": "git",

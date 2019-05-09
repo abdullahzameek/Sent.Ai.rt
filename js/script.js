@@ -304,7 +304,7 @@ function writeText(){
     fill(255);
     text("Hit the spacebar to take a picture!", windowWidth*0.33, windowHeight*0.82);
     textSize(35);
-    text("sent.ai.rt", windowWidth*0.43, windowHeight*0.05);
+    text("sent.ai.rt", windowWidth*0.41, windowHeight*0.05);
  }
 
  function printTitle(title){

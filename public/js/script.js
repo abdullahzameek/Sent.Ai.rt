@@ -303,7 +303,7 @@ function writeText(){
     textSize(27);
     fill(255);
     text("Hit the spacebar to take a picture!", windowWidth*0.33, windowHeight*0.82);
-    textSize(30);
+    textSize(35);
     text("sent.ai.rt", windowWidth*0.43, windowHeight*0.05);
  }
 
@@ -344,31 +344,10 @@ function writeText(){
 function displayWords(expression)
 {
     console.log("the expression is "+expression);
-    if(expression === "neutral")
-    {
-        fill(0);
-        textSize(26);
-        text(words[0],windowWidth/6, windowHeight/2);
-        text(words[4],windowWidth/7, windowHeight/4);
-        text(words[8],windowWidth/5, windowHeight/3);
-        text(words[12],windowWidth/8.5, 3*windowHeight/4);
-        text(words[1],windowWidth/12, 7*windowHeight/12);
-        text(words[5],windowWidth/10, 5*windowHeight/6);
-        text(words[9],windowWidth/5, 2*windowHeight/5);
-        text(words[13],windowWidth/9, 8*windowHeight/12);
-        text(words[2],windowWidth/6+windowWidth/1.6, windowHeight/2);
-        text(words[6],windowWidth/7+windowWidth/1.6, windowHeight/4);
-        text(words[10],windowWidth/5+windowWidth/1.6, windowHeight/3);
-        text(words[14],windowWidth/8.5+windowWidth/1.6, 3*windowHeight/4);
-        text(words[3],windowWidth/12+windowWidth/1.6, 7*windowHeight/12);
-        text(words[7],windowWidth/10+windowWidth/1.6, 5*windowHeight/6);
-        text(words[11],windowWidth/5+windowWidth/1.6, 2*windowHeight/5);
-        text(words[15],windowWidth/9+windowWidth/1.6, 8*windowHeight/12);
-    }
     if(expression === "happy")
     {
         fill(255,255,random(10,200));
-        textSize(26);
+        textSize(28);
         text(words[0],windowWidth/6, windowHeight/2);
         text(words[1],windowWidth/12, 7*windowHeight/12);
         text(words[2],windowWidth/6+windowWidth/1.6, windowHeight/2);
@@ -390,7 +369,7 @@ function displayWords(expression)
     if(expression === "sad")
     {
         fill(random(0,40),random(0,40), random(200,255));
-        textSize(26);
+        textSize(28);
         text(words[4],windowWidth/7, windowHeight/4);
         text(words[5],windowWidth/10, 5*windowHeight/6);
         text(words[6],windowWidth/7+windowWidth/1.6, windowHeight/4);
@@ -413,7 +392,7 @@ function displayWords(expression)
     {
 
         fill(random(200,255), random(0,40),random(0,40));
-        textSize(26);
+        textSize(28);
         text(words[8],windowWidth/5, windowHeight/3);
         text(words[9],windowWidth/5, 2*windowHeight/5);
         text(words[10],windowWidth/5+windowWidth/1.6, windowHeight/3);
@@ -436,7 +415,7 @@ function displayWords(expression)
     if(expression === "surprised")
     {
         fill(245,245,245);
-        textSize(26);
+        textSize(28);
         text(words[12],windowWidth/8.5, 3*windowHeight/4);
         text(words[13],windowWidth/9, 8*windowHeight/12);
         text(words[14],windowWidth/8.5+windowWidth/1.6, 3*windowHeight/4);

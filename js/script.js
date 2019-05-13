@@ -127,7 +127,7 @@ function draw()
     faceapi.detectAllFaces(video.elt).withFaceExpressions()
         .then((allFaces) => {
             background(0);
-            image(video, windowWidth/3, windowHeight/12, windowWidth/3.5, windowHeight/1.5)
+            image(video, windowWidth/3, windowHeight/12, windowWidth/3.5, windowHeight/1.5);
             for (var detectionsWithExpressions of allFaces)
             {
                 let bestExpr = "";
@@ -196,6 +196,9 @@ function draw()
             prevStyle = style_names[styleIndex];
         }
     });
+    fill(255);
+    textSize(10);
+    text(frameRate(), 10, 20);
 }
     
 function getStyleTransfer(expression)

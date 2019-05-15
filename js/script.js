@@ -305,7 +305,10 @@ function writeText(){
     textFont(fontNew);
     textSize(27);
     fill(255);
-    text("Hit the spacebar to take a picture!", windowWidth*0.33, windowHeight*0.82);
+    text("So, how do you feel today?" , windowWidth *0.36, windowHeight*0.82);
+    textSize(24);
+    text("(Hit the spacebar to take a picture!)", windowWidth*0.33, windowHeight*0.87);
+    
     textSize(35);
     text("sent.ai.rt", windowWidth*0.41, windowHeight*0.05);
  }
@@ -317,6 +320,7 @@ function writeText(){
     textFont(fontNew);
     textSize(20);
     fill(255);
+    
     text("Currently Playing: "+title, windowWidth/3, windowHeight*0.95);
  }
 

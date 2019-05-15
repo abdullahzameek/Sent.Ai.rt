@@ -139,7 +139,6 @@ function draw()
                 }
                 else 
                 {
-                
                     let face = detectionsWithExpressions.detection;
                     let exprs = detectionsWithExpressions.expressions;
 

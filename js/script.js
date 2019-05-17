@@ -306,8 +306,8 @@ function writeText(){
     textSize(27);
     fill(255);
     text("So, how do you feel today?" , windowWidth *0.36, windowHeight*0.82);
-    textSize(24);
-    text("(Hit the spacebar to take a picture!)", windowWidth*0.33, windowHeight*0.87);
+    //textSize(24);
+    //text("(Hit the spacebar to take a picture!)", windowWidth*0.33, windowHeight*0.87);
     
     textSize(35);
     text("sent.ai.rt", windowWidth*0.41, windowHeight*0.05);

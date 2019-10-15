@@ -3,14 +3,11 @@
 A real-time camera feed that detects human emotion and adapts the style of the feed in relation to the emotion to create a 
 picture that is in a style representative of the person’s mood.
 
-Extra Feature 1 : Play back music that relates to the emotion? (This is almost done woot)
-
-Extra Feature 2 : Save and Tweet out the picture using a Twitter Bot.
+Extra Feature 1 : Play back music that relates to the emotion?  (DONE DONE DONE) 
+Extra Feature 2 : Save and Tweet out the picture using a Twitter Bot. (WIP RIP)
 
 In technical lingo, it’s capturing real-time video to perform sentiment analysis followed by neural style transfer 
 based on the output from the analysis. 
-
-As part of Communications Lab, NYU Shanghai Spring 2019
 
 
 # Introduction and Project Rationale: 
@@ -150,5 +147,5 @@ But, note, the keyword is “deployed”. Even though the app was deployed succe
 # Final Thoughts/Future Work/ Feedback 
 
 All in all, I’m pretty happy with the way things turned out, I was able to get all the elements working on time. However, one of the more glaring problems is the fact that the video stream is quite laggy and renders at a very low frameRate. Moon suggested that I use openCV to try to capture the face before feeding the stream to the faceAPI so that there would be fewer pixels rendered in real time. Dave and I sat down with Visual Studio Code LiveShare to try and integrate openCV but it would cause trouble on the ml5js side and since it was already quite late, we decided to shelf that feature for later. Ideally, that would make the video stream a lot faster. Another feature that I might integrate at some point is a function to maybe Tweet any photos you take via a Twitter Bot to a public Twitter page. Additionally, I’m still in the process of searching for a proper host that could serve my site in a reasonable amount of time without crashing.
-After presenting in class, I learnt there were a few more minor adjustments that could have been made, after taking into account Cici’s, Nimrah’s and Tristan’s feedback. One thing that was brought up was the very apparent lag in doing the style transfer (which is something that I’m working on). However, at the actual IMA show, I found that there was another glitch which was that the program would often get “confused” when there were multiple faces in the frame, so I’m looking  for a way to make it actually detect a single face instead. 
+One thing that was brought up was the very apparent lag in doing the style transfer (which is something that I’m working on). However, at the actual IMA show, I found that there was another glitch which was that the program would often get “confused” when there were multiple faces in the frame, so I’m looking  for a way to make it actually detect a single face instead. 
 But, again, I’m quite pleased with what I’ve put up, its been quite the journey, and as frustrating as it was at some points, I’m glad that I did it. 

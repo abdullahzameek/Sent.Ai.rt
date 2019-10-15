@@ -39,14 +39,11 @@ Confusion – White/Grey.
 
 Next, I sourced out famous paintings that had these color palettes as the primary colors. These four paintings are what I settled on in the end:
 
-fqwf
-Happiness – Sunflowers by Vincent Van Gogh
-faw
-Sadness – Starry Night by Vincent Van Gogh
-f
-Anger – The Scream by Edvard Munch
-qf
-Surprise – Guernica by Pablo Picasso
+Happiness – Sunflowers by Vincent Van Gogh  
+Sadness – Starry Night by Vincent Van Gogh  
+Anger – The Scream by Edvard Munch  
+Surprise – Guernica by Pablo Picasso  
+
 While the selection of these paintings were somewhat arbitrary in nature, I believe that since I was more interested in sourcing out paintings with a desired color palette, these images fit the description pretty well.
 In addition to these visual assets, I also needed to gather music that corresponded to the different emotions.  In order to minimize personal bias on this step, since I did not have any fixed criterion to decide what songs correspond to what mood, I decided to crowd-source these. I compiled a collection of songs after conducting a survey on NYUAD’s campus Facebook group. 
 
